@@ -24,41 +24,46 @@ Breaking changes should not be remotely close to common, if inexistent.
 
 From now on, the current available project interfaces.
 
-## Exceptor contracts
+## Exceptable contracts
 
 These contracts are composed by a group 5 of interfaces:
 
-* Exceptor
-* RunnableExceptor
+* Exceptable
+* ExceptableRunnable
+* ExceptableExtractor
 * ExceptableFunction
 * ExceptableSupplier
 * ExceptablePredicate
+* BiExceptable
+* BiExceptableExtractor
+* BiExceptableFunction
+* BiExceptablePredicate
 
 Their differential is the possibility of throwing checked exception,
 giving the developer more flexibility through lambda functions which used
 to take an entire try-catch and a throw new runtime exception just to be able to
 use a specific method
 
-### Exceptor
+### Exceptable
 
-Exceptor is the principal functional interface with a generic signature for two values,
+Exceptable is the principal functional interface with a generic signature for two values,
 an argument class type and an exception subclass type:
 
 ```java
-// com.heroicet.contract.functional.Exceptor
-public interface Exceptor<Argument, Exception> {}
+// com.heroicet.contract.functional.exceptable.Exceptable
+public interface Exceptable<Argument, Exception> {}
 ```
 
 It exposes an `apply(arg)` method which receives a value and doesn't return any.
 
-### RunnableException
+### ExceptableRunnable
 
 RunnableException is a counterpart to Runnable lambda interfaces,
 but this one takes only one signature value compared to exceptor:
 
 ```java
-// com.heroicet.contract.functional.RunnableExceptor
-public interface RunnableExceptor<Exception> {}
+// com.heroicet.contract.functional.exceptable.ExceptableRunnable
+public interface ExceptableRunnable<Exception> {}
 ```
 
 It exposes a `run()` method which doesn't receive arguments and doesn't return values.<br>
@@ -68,13 +73,26 @@ This could be made possible,
 but the idea of an interface able to throw exceptions on separated thread is catastrophic,
 and would also take an enormous amount of time and effort to develop and make it safe to use.
 
+### ExceptableExtractor
+
+ExceptableExtractor is an interface focused on return exception instances rather than throwing it directly.
+This is important on the case sequential operations is needed to be made and exceptions can be thrown, which
+by normal mean it would hurt performance pretty badly.
+
+```java
+// com.heroicet.contract.functional.exceptable.ExceptableExtractor
+public interface ExceptableExtractor<Argument, Exception> {}
+```
+
+It exposes a `extract(arg)` method, which will return an exception or null.
+
 ### ExceptableFunction
 
 This is a counterpart for Function lambda interface,
 this one take three signature values:
 
 ```java
-// com.heroicet.contract.functional.ExceptableFunction
+// com.heroicet.contract.functional.exceptable.ExceptableFunction
 public interface ExceptableFunction<Argument, Return, Exception> {}
 ```
 
@@ -86,7 +104,7 @@ ExceptableSupplier is a functional interface based on oracle's jdk implementatio
 it takes 2 signature values:
 
 ```java
-// com.heroicet.contract.functional.ExceptableSupplier
+// com.heroicet.contract.functional.exceptable.ExceptableSupplier
 public interface ExceptableSupplier<Return, Exception> {}
 ```
 
@@ -97,11 +115,54 @@ The interface exposes a `get()` method which returns a value, but doesn't take a
 The ExceptablePredicate is used to validation, this one take two signature values:
 
 ```java
-// com.heroicet.contract.functional.ExceptablePredicate
+// com.heroicet.contract.functional.exceptable.ExceptablePredicate
 public interface ExceptablePredicate<Argument, Exception> {}
 ```
 
 It exposes a `test(arg)` method which takes an argument and returns a boolean.
+
+### BiExceptable
+
+BiExceptable is a double argument counterpart of Exceptable, it works similarly too.
+
+```java
+// com.heroicet.contract.functional.exceptable.BiExceptable
+public interface BiExceptable<Argument, Argument, Exception> {}
+```
+
+The interface exposes an `apply(arg1,arg2)` to its function.
+
+### BiExceptableExtractor
+
+BiExceptorExtractor is a double argument variance of ExceptabelExtractor that works similarly to its base
+
+```java
+// com.heroicet.contract.functional.exceptable.BiExceptableExtractor
+```
+
+It exposes an `extract(arg1,arg2)`
+
+### BiExceptableFunction
+
+BiExceptableFunction is a double argument counterpart of ExceptableFunction, it works similarly.
+
+```java
+// com.heroicet.contract.functional.exceptable.BiExceptableFunction
+public interface BiExceptableFunction<Argument, Argument, Exception> {}
+```
+
+The interface exposes an `apply(arg1,arg2)` to its processing.
+
+### BiExceptablePredicate
+
+BiExceptablePredicate is a double argument counterpart of ExceptablePredicate, it works similarly to it.
+
+```java
+// com.heroicet.contract.functional.exceptable.BiExceptablePredicate
+public interface BiExceptablePredicate<Argument, Argument, Exception> {}
+```
+
+The interface exposes a `test(arg1,arg2)` to its execution.
 
 # Usage
 

@@ -1,7 +1,7 @@
-package com.heroicet.contract.functional.exceptor;
+package com.heroicet.contract.functional.exceptable;
 
 /**
- * exceptable predicate is a testing lambda function that takes a specified
+ * ExceptablePredicate is a testing lambda function that takes a specified
  * type of argument and returns a boolean value. Able to throw checked expressions.
  *
  * @param <A> Argument type for processing
@@ -10,8 +10,7 @@ package com.heroicet.contract.functional.exceptor;
 @FunctionalInterface
 public interface ExceptablePredicate<A, E extends Exception> {
   /**
-   * tests the method defined on interface instantiation.
-   *
+   * Tests the method defined on interface instantiation by taking one argument and returning a non-null boolean value.
    * @return Returns a boolean value verifying predicate validation.
    */
   boolean test(A arg) throws E;

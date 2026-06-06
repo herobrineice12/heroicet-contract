@@ -1,7 +1,7 @@
-package com.heroicet.contract.functional.exceptor;
+package com.heroicet.contract.functional.exceptable;
 
 /**
- * Similar to Consumer<T> functional interface in functionality, but this kind
+ * Similar to Consumer functional interface in functionality, but this kind
  * allows to throw
  * cleaner exceptions compared to RuntimeExceptions, which requires an
  * additional try-catch
@@ -12,9 +12,9 @@ package com.heroicet.contract.functional.exceptor;
  * @param <E> The type of error that is possible to be thrown inside the method.
  */
 @FunctionalInterface
-public interface Exceptor<A, E extends Exception> {
+public interface Exceptable<A, E extends Exception> {
   /**
-   * Executes lambda function declared on interface instantiation and throws a
+   * Executes lambda function declared on interface instantiation and may throw or not a
    * type of exception.
    */
   void apply(A arg) throws E;

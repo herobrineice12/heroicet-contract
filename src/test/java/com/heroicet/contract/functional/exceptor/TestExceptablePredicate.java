@@ -1,20 +1,31 @@
 package com.heroicet.contract.functional.exceptor;
 
+import com.heroicet.contract.functional.exceptable.ExceptablePredicate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class TestExceptablePredicate {
-    @Test
-    public void assertExceptablePredicate() {
-        ExceptablePredicate<Void, Exception> exceptor = (v) -> true;
-        Assertions.assertDoesNotThrow(() -> exceptor.test(null));
+    private static ExceptablePredicate<Boolean,Exception> exceptablePredicate;
+
+    static {
+        exceptablePredicate = (b) -> {
+            if (b) throw new Exception();
+            return true;
+        };
     }
 
     @Test
-    public void assertThrowingExceptablePredicate() {
-        ExceptablePredicate<Void, Exception> exceptor = (v) -> {
-            throw new Exception();
-        };
-        Assertions.assertThrows(Exception.class, () -> exceptor.test(null));
+    public void exceptablePredicateThrows() {
+        Assertions.assertThrows(Exception.class,() -> exceptablePredicate.test(true));
+    }
+
+    @Test
+    public void exceptablePredicateDoesNotThrow() {
+        Assertions.assertDoesNotThrow(() -> exceptablePredicate.test(false));
+    }
+
+    @Test
+    public void exceptablePredicateReturns() throws Exception {
+        Assertions.assertTrue(exceptablePredicate.test(false));
     }
 }

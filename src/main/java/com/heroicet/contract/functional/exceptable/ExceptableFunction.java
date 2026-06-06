@@ -1,7 +1,7 @@
-package com.heroicet.contract.functional.exceptor;
+package com.heroicet.contract.functional.exceptable;
 
 /**
- * exceptable function is a function which receives and specified type of argument,
+ * ExceptableFunction is a function which receives and specified type of argument,
  * and returns a specified type of value. Able to throw checked exceptions.
  *
  * @param <A> Argument type for processing

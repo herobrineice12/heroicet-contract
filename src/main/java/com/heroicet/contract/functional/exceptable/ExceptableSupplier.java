@@ -1,4 +1,4 @@
-package com.heroicet.contract.functional.exceptor;
+package com.heroicet.contract.functional.exceptable;
 
 /**
  * exceptable supplier is a lazy lambda function that takes one specified type of argument and
