@@ -22,6 +22,6 @@ public class TestExceptableRunnable {
 
     @Test
     public void exceptableRunnableDoesNotThrow() {
-        Assertions.assertThrows(Exception.class,() -> safeRunnable.run());
+        Assertions.assertDoesNotThrow(() -> safeRunnable.run());
     }
 }

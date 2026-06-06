@@ -8,6 +8,7 @@ package com.heroicet.contract.functional.exceptable;
  * @param <U> Second argument type for processing
  * @param <E> Exception type that may be thrown
  */
+@FunctionalInterface
 public interface BiExceptablePredicate<A,U,E extends Exception> {
     /**
      * Test the method defined on interface instantiation by taking two arguments and returning a non-null boolean value.
